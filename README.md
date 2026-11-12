@@ -5,8 +5,8 @@
 
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php)](https://php.net)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Click_Here-28a745?style=flat-square&logo=firefox)](https://alivecheck.duckdns.org:5555/)
 
-**LIVE DEMO** -> https://alivecheck.duckdns.org:5555/
 
 ---
 
@@ -25,7 +25,7 @@
 
 ---
 
-## Tech Stack / Tecnologías
+## 🛠️ Tech Stack / Tecnologías
 
 | Technology / Tecnología | Version / Versión | Purpose / Propósito |
 |-------------------------|-------------------|---------------------|
