@@ -31,13 +31,43 @@
                     @endif
                 </small></p>
             </div>
+            <form action="{{ route('services.check', $service) }}" method="POST"> <!-- con esto, segun la documentacion, puedo pasar el modelo entero, en vez de slo un id, laravel ya lo interpreta -->
+                @csrf
+                @method('PATCH')
+                <button class="btn btn-sm btn-primary">
+                    <i class="bi bi-arrow-clockwise"></i>
+                </button>
+            </form>
+            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteServiceModal{{ $service->id }}">
+                <i class="bi bi-trash-fill"></i>
+                <span class="visually-hidden">Eliminar {{ $service->name }}</span>
+            </button>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteServiceModal{{ $service->id }}" tabindex="-1" aria-labelledby="deleteServiceModalLabel{{ $service->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteServiceModalLabel{{ $service->id }}">Eliminar servicio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Seguro que quieres eliminar <strong>{{ $service->name }}</strong>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form action="{{ route('services.destroy', $service) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @empty
-</div>
     <!-- mensaje: "No hay servicios registrados aún" con una alerta de Bootstrap -->
     <div class="alert alert-info" role="alert"> No hay servicios registrados aún. <a href="{{ route('services.create') }}" class="alert-link">Añade un servicio</a> para empezar a monitorizar. </div>
 @endforelse
 </div>
 @endsection
-

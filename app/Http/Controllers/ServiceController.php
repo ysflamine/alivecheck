@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
+use Illuminate\Support\Facades\Http;
 
 class ServiceController extends Controller
 {
@@ -67,8 +68,34 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(Service $service){
+        $service->delete();
+        return redirect()->route('services.index')->with('exito', 'Servicio eliminado correctamente.');
     }
+
+public function check(Service $service){
+$status = 'down';
+    try {
+        // Hacemos la petición con timeout
+        $respuesta = Http::timeout(5)->get($service->target);
+
+        // Si la respuesta es exitosa, el servicio está arriba
+        if ($respuesta->successful()) {
+            $status = 'up';
+        }
+    } catch (\Throwable $e) {
+        // Si hay un error de red, timeout, DNS, etc., el estado sigue siendo 'down'
+        $status = 'down';
+    }
+
+    // Actualizamos el servicio una sola vez
+    $service->update([     
+        'last_status' => $status,         
+        'last_checked_at' => now(),
+    ]);
+
+    return redirect()
+        ->route('services.index')
+        ->with('exito', 'Verificación realizada correctamente. Estado: ' . $status);
+}
 }

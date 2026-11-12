@@ -12,8 +12,8 @@
     @enderror
 </div>
 <div class="mb-3">
-    <label for="target" class="form-label">URL o IP a comprobar</label>
-    <input type="text" class="form-control @error('target') is-invalid @enderror"  id="target" name="target" value="{{ old('target') }}" required>
+    <label for="target" class="form-label" >URL o IP a comprobar</label>
+    <input type="text" placeholder="Ej: https://www.google.com" class="form-control @error('target') is-invalid @enderror"  id="target" name="target" value="{{ old('target') }}" required>
     @error('target')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
