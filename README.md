@@ -25,7 +25,7 @@
 
 ---
 
-## 🛠️ Tech Stack / Tecnologías
+## Tech Stack / Tecnologías
 
 | Technology / Tecnología | Version / Versión | Purpose / Propósito |
 |-------------------------|-------------------|---------------------|
