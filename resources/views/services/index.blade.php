@@ -17,7 +17,7 @@
     <!-- diseño de cada tarjeta -->
     <div class="col-md-6 mb-3">
         <div class="card shadow-sm h-100">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ $service->name }}</h5>
                 <p class="card-text">{{ $service->target }}</p>
                 <p class="card-text"><small class="text-muted">Última verificación: {{ $service->last_checked_at?->diffForHumans() ?? 'Nunca' }}</small></p> <!-- operador nullsafe, permite acceder a métodos y propiedades de un objeto que puede ser null -->
@@ -30,18 +30,21 @@
                         <span class="badge bg-secondary">Desconocido</span>
                     @endif
                 </small></p>
+                <div class="d-flex gap-2 mt-auto">
+                    <form action="{{ route('services.check', $service) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('PATCH')
+                        <button class="btn btn-sm btn-primary" type="submit">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            <span class="visually-hidden">Comprobar servicio</span>
+                        </button>
+                    </form>
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteServiceModal{{ $service->id }}">
+                        <i class="bi bi-trash-fill"></i>
+                        <span class="visually-hidden">Eliminar {{ $service->name }}</span>
+                    </button>
+                </div>
             </div>
-            <form action="{{ route('services.check', $service) }}" method="POST"> <!-- con esto, segun la documentacion, puedo pasar el modelo entero, en vez de slo un id, laravel ya lo interpreta -->
-                @csrf
-                @method('PATCH')
-                <button class="btn btn-sm btn-primary">
-                    <i class="bi bi-arrow-clockwise"></i>
-                </button>
-            </form>
-            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteServiceModal{{ $service->id }}">
-                <i class="bi bi-trash-fill"></i>
-                <span class="visually-hidden">Eliminar {{ $service->name }}</span>
-            </button>
         </div>
     </div>
     <div class="modal fade" id="deleteServiceModal{{ $service->id }}" tabindex="-1" aria-labelledby="deleteServiceModalLabel{{ $service->id }}" aria-hidden="true">
