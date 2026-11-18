@@ -1,9 +1,6 @@
 <x-layouts.app titulo="AliveCheck - Panel de Monitorización">
 @if (session('exito'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="bi bi-check-circle-fill me-2"></i> {{ session('exito') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
+    <x-alert type="success" :message="session('exito')" />
 @endif
 <div class="row">
 @forelse ($services as $service)
