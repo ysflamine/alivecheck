@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('contenido')
+<x-layouts.app titulo="AliveCheck - Añadir servicio">
 <form action="{{ route('services.store') }}" method="POST">
     @csrf <!-- SIEMPRE hay que poner el token de seguridad -->
 <div class="mb-3">
@@ -20,4 +18,4 @@
 </div>
 <button type="submit" class="btn btn-success">Añadir servicio</button>
 </form>
-@endsection
+</x-layouts.app>

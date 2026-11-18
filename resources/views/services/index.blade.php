@@ -1,17 +1,10 @@
-@extends('layouts.app')
-
-@section('titulo', 'AliveCheck - Panel de Monitorización')
-
-@section('contenido')
-   @if (session('exito'))
-       <div class="alert alert-success alert-dismissible fade show" role="alert">
-           <i class="bi bi-check-circle-fill me-2"></i> {{ session('exito') }}
-           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-       </div>
-   @endif
-
-<!-- En lugar de usar una condición y un bucle, Laravel tiene una directiva mágica llamada forelse. -->
-<!-- Hace el bucle, pero si la colección está vacía, ejecuta automáticamente un bloque empty -->
+<x-layouts.app titulo="AliveCheck - Panel de Monitorización">
+@if (session('exito'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i> {{ session('exito') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
 <div class="row">
 @forelse ($services as $service)
     <!-- diseño de cada tarjeta -->
@@ -73,4 +66,4 @@
     <div class="alert alert-info" role="alert"> No hay servicios registrados aún. <a href="{{ route('services.create') }}" class="alert-link">Añade un servicio</a> para empezar a monitorizar. </div>
 @endforelse
 </div>
-@endsection
+</x-layouts.app>
