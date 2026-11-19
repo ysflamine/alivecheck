@@ -1,8 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\AdminAuthController;
 
-Route::get('/', fn() => redirect()->route('services.index'));/* por que esta forma?  puedo redirigir usando el nombre de la ruta, para que si mañana cambio la URL no se rompa */
-Route::patch('services/{service}/check', [ServiceController::class, 'check'])->name('services.check');
-Route::resource('services', ServiceController::class);
+Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AdminAuthController::class, 'authenticate'])->name('login.attempt');
+Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+
+// rutas protegidas por el middleware 'admin'
+Route::middleware('admin')->group(function () {
+    Route::get('/', fn() => redirect()->route('services.index'));
+    Route::patch('services/{service}/check', [ServiceController::class, 'check'])->name('services.check');
+    Route::resource('services', ServiceController::class);
+});
