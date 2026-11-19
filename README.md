@@ -57,11 +57,25 @@ Follow these steps to set up the project in your local development environment:
    php artisan key:generate
    ```
    (Edit the .env file and configure your MariaDB/MySQL database credentials).
-4. Migrate and seed / Migrar y poblar la base de datos:
+4. Configure Admin Login / Configurar Login de Administrador:
+   Generate a secure password hash by running:
+   ```bash
+   php artisan tinker
+   ```
+   **Inside tinker, type:**
+   ```bash
+   echo Hash::make('your_password');
+   ```
+   **Copy the output (starts with $2y$) and paste it in .env:**
+   
+   ADMIN_USER="admin"
+
+   ADMIN_PASS="$2y$10$..."
+6. Migrate and seed / Migrar y poblar la base de datos:
    ```bash
    php artisan migrate --seed
    ```
-5. Start development server / Arrancar el servidor:
+7. Start development server / Arrancar el servidor:
    ```bash
    php artisan serve
    ```
