@@ -18,6 +18,12 @@
                 <i class="bi bi-plus-lg me-1"></i> Añadir servicio
             </a>
         </div>
+        <div class="d-flex gap-2">
+            <a href="{{ route('services.create') }}" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-plus-lg me-1"></i> Añadir servicio
+            </a>
+            <x-logout />
+        </div>        
     </nav>
 
     <div class="container">
