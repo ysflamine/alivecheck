@@ -9,26 +9,23 @@
 </head>
 <body>
     
-    <nav class="navbar navbar-dark bg-dark mb-4">
+    <nav class="navbar bg-dark mb-4" data-bs-theme="dark">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <i class="bi bi-activity me-2"></i> AliveCheck
             </a>
-            <a href="{{ route('services.create') }}" class="btn btn-outline-light btn-sm">
-                <i class="bi bi-plus-lg me-1"></i> Añadir servicio
-            </a>
-        </div>
-        <div class="d-flex gap-2">
-            <a href="{{ route('services.create') }}" class="btn btn-outline-light btn-sm">
-                <i class="bi bi-plus-lg me-1"></i> Añadir servicio
-            </a>
-            <x-logout />
+            <div class="d-flex align-items-center gap-2">
+                <a href="{{ route('services.create') }}" class="btn btn-outline-light btn-sm">
+                    <i class="bi bi-plus-lg me-1"></i> Añadir servicio
+                </a>
+                <x-logout />
+            </div>
         </div>        
     </nav>
 
-    <div class="container">
+    <main class="container">
         {{ $slot }}
-    </div>
+    </main>
 
     <footer class="text-center text-muted mt-5 mb-3">
         <small>&copy; 2026 AliveCheck. Todos los derechos reservados.</small>
